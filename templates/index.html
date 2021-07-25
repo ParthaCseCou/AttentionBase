@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>Attention Level Calculation</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8  offset-lg-2">
+            <h3 class="mt-5" style="margin: 1em auto 0; text-align: center; font-size: 2em;">Attention Level Calculation</h3>
+            {% if camera %}
+                <img src="{{ url_for('video_feed', camera=camera) }}" width="100%">
+            {% endif %}
+            <form action="{{ url_for('get_camera') }}" method="POST">
+                <div style="display: block; border: 2px solid grey; margin-top: 1em; text-align: center; padding: 2em 0;">
+                    <div style="display: inline-block;"> Select: </div>
+                    <div style="display: inline-block;">
+                        <select name="camera" id="camera">
+                          <option value="webcam">Webcam</option>
+                          <option value="external">External USB Camera</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="display: block; margin: -10px auto; text-align: center;">
+                    <input type="submit" style="border-radius: 10px;margin: auto;" value="Connect">
+                </div>
+            </form>
+            {% if camera %}
+                <div style="margin: 3em auto 0; text-align: center; font-size: 2em;">
+                    <a href="{{ url_for('stop_camera', camera=camera) }}" style="border: 2px solid grey; background: black; border-radius: 5px;">Stop</a>
+                </div>
+                <div style="margin: .5em auto 0; text-align: center; font-size: 2em;">
+                    <a href="{{ url_for('generate_csv', camera=camera) }}" style="border: 2px solid grey; background: black; border-radius: 5px;">Generate CSV</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
